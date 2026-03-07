@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:app"
         xmlns:viewmodels="clr-namespace:app.ViewModels"
         mc:Ignorable="d"
@@ -227,25 +226,13 @@
                                     <TextBlock Text="Quick Actions" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource AccentBlue}" Margin="0,0,0,15"/>
                                     <!-- Index 2 is Gauges Tab -->
                                     <Button Content="📏 Manage Gauges" Style="{StaticResource PrimaryButtonStyle}" Margin="0,0,0,10" HorizontalContentAlignment="Left" Padding="15,10"
-                                            Command="{Binding NavigateToTabCommand}">
-                                        <Button.CommandParameter>
-                                            <sys:Int32>2</sys:Int32>
-                                        </Button.CommandParameter>
-                                    </Button>
+                                            Command="{Binding NavigateToTabCommand}" CommandParameter="2"/>
                                     <!-- Index 3 is Production Tab -->
                                     <Button Content="📊 Log Production" Style="{StaticResource SuccessButtonStyle}" Margin="0,0,0,10" HorizontalContentAlignment="Left" Padding="15,10"
-                                            Command="{Binding NavigateToTabCommand}">
-                                        <Button.CommandParameter>
-                                            <sys:Int32>3</sys:Int32>
-                                        </Button.CommandParameter>
-                                    </Button>
+                                            Command="{Binding NavigateToTabCommand}" CommandParameter="3"/>
                                     <!-- Index 6 is Export Tab -->
                                     <Button Content="📥 Export Data" Style="{StaticResource WarningButtonStyle}" HorizontalContentAlignment="Left" Padding="15,10"
-                                            Command="{Binding NavigateToTabCommand}">
-                                        <Button.CommandParameter>
-                                            <sys:Int32>6</sys:Int32>
-                                        </Button.CommandParameter>
-                                    </Button>
+                                            Command="{Binding NavigateToTabCommand}" CommandParameter="6"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
