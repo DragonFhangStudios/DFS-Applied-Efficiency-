@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Position Calculator</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --text-main: #E0E0E0;
+            --text-muted: #A0A0A0;
+            --accent-blue: #007BFF;
+            --accent-blue-hover: #0056b3;
+            --border-color: #333333;
+            --error-color: #ff4d4d;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border-color);
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .row .input-group {
+            flex: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.85rem;
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background-color: var(--accent-blue-hover);
+        }
+
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: rgba(0, 123, 255, 0.1);
+            border: 1px solid var(--accent-blue);
+            border-radius: 6px;
+            text-align: center;
+            min-height: 24px;
+        }
+
+        .result-value {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+
+        .error-msg {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            min-height: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>True Position Calculator</h2>
+
+        <div class="row">
+            <div class="input-group">
+                <label for="xActual">X Actual</label>
+                <input type="number" id="xActual" step="any" placeholder="0.000">
+            </div>
+            <div class="input-group">
+                <label for="xTarget">X Target</label>
+                <input type="number" id="xTarget" step="any" placeholder="0.000">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-group">
+                <label for="yActual">Y Actual</label>
+                <input type="number" id="yActual" step="any" placeholder="0.000">
+            </div>
+            <div class="input-group">
+                <label for="yTarget">Y Target</label>
+                <input type="number" id="yTarget" step="any" placeholder="0.000">
+            </div>
+        </div>
+
+        <button onclick="calculateTruePosition()">Calculate</button>
+
+        <div class="error-msg" id="errorMsg"></div>
+
+        <div class="result-box">
+            <span id="resultLabel">True Position: </span>
+            <span class="result-value" id="resultValue">---</span>
+        </div>
+    </div>
+
+    <script>
+        // Listen for messages from C# backend
+        if (window.chrome && window.chrome.webview) {
+            window.chrome.webview.addEventListener('message', event => {
+                const response = JSON.parse(event.data);
+
+                if (response.success) {
+                    document.getElementById('resultValue').innerText = response.truePosition;
+                    document.getElementById('errorMsg').innerText = '';
+                } else {
+                    document.getElementById('resultValue').innerText = '---';
+                    document.getElementById('errorMsg').innerText = response.errorMessage || 'Calculation error';
+                }
+            });
+        }
+
+        function calculateTruePosition() {
+            // Get values
+            const xActual = document.getElementById('xActual').value;
+            const xTarget = document.getElementById('xTarget').value;
+            const yActual = document.getElementById('yActual').value;
+            const yTarget = document.getElementById('yTarget').value;
+
+            // Basic validation
+            if (xActual === '' || xTarget === '' || yActual === '' || yTarget === '') {
+                document.getElementById('errorMsg').innerText = 'Please fill in all fields.';
+                document.getElementById('resultValue').innerText = '---';
+                return;
+            }
+
+            // Create payload
+            const payload = {
+                action: 'calculate',
+                xActual: parseFloat(xActual),
+                xTarget: parseFloat(xTarget),
+                yActual: parseFloat(yActual),
+                yTarget: parseFloat(yTarget)
+            };
+
+            // Send to C#
+            if (window.chrome && window.chrome.webview) {
+                window.chrome.webview.postMessage(JSON.stringify(payload));
+            } else {
+                document.getElementById('errorMsg').innerText = 'WebView2 not detected. Cannot communicate with backend.';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -8,17 +8,55 @@
     ".NETCoreApp,Version=v10.0": {
       "app/1.0.0": {
         "dependencies": {
-          "CommunityToolkit.Mvvm": "8.4.0"
+          "Microsoft.Web.WebView2": "1.0.3800.47",
+          "Microsoft.Web.WebView2.Core": "1.0.3800.47",
+          "Microsoft.Web.WebView2.WinForms": "1.0.3800.47",
+          "Microsoft.Web.WebView2.Wpf": "1.0.3800.47"
         },
         "runtime": {
           "app.dll": {}
         }
       },
-      "CommunityToolkit.Mvvm/8.4.0": {
+      "Microsoft.Web.WebView2/1.0.3800.47": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/WebView2Loader.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/WebView2Loader.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/WebView2Loader.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.Core/1.0.3800.47": {
         "runtime": {
-          "lib/net8.0/CommunityToolkit.Mvvm.dll": {
-            "assemblyVersion": "8.4.0.0",
-            "fileVersion": "8.4.0.1"
+          "Microsoft.Web.WebView2.Core.dll": {
+            "assemblyVersion": "1.0.3800.47",
+            "fileVersion": "1.0.3800.47"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.WinForms/1.0.3800.47": {
+        "runtime": {
+          "Microsoft.Web.WebView2.WinForms.dll": {
+            "assemblyVersion": "1.0.3800.47",
+            "fileVersion": "1.0.3800.47"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.Wpf/1.0.3800.47": {
+        "runtime": {
+          "Microsoft.Web.WebView2.Wpf.dll": {
+            "assemblyVersion": "1.0.3800.47",
+            "fileVersion": "1.0.3800.47"
           }
         }
       }
@@ -30,12 +68,27 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CommunityToolkit.Mvvm/8.4.0": {
+    "Microsoft.Web.WebView2/1.0.3800.47": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-tqVU8yc/ADO9oiTRyTnwhFN68hCwvkliMierptWOudIAvWY1mWCh5VFh+guwHJmpMwfg0J0rY+yyd5Oy7ty9Uw==",
-      "path": "communitytoolkit.mvvm/8.4.0",
-      "hashPath": "communitytoolkit.mvvm.8.4.0.nupkg.sha512"
+      "sha512": "sha512-vluoF9sqb72AB02yYs1UXW/2/VsxOMl2idiFJNvG993sOw3bHJvjHXmd3tqevTd9s3Md/9FgEzkOXoUl2Nb/ww==",
+      "path": "microsoft.web.webview2/1.0.3800.47",
+      "hashPath": "microsoft.web.webview2.1.0.3800.47.nupkg.sha512"
+    },
+    "Microsoft.Web.WebView2.Core/1.0.3800.47": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.WinForms/1.0.3800.47": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.Wpf/1.0.3800.47": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }
