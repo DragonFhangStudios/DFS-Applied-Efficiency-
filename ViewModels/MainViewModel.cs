@@ -52,6 +52,9 @@ public partial class MainViewModel(IAerospaceMathService mathService) : Observab
     [ObservableProperty]
     private ObservableCollection<string> _npiTasks = new();
 
+    [ObservableProperty]
+    private int _selectedTabIndex = 0;
+
     // High Precision Decimal Properties for Math UI
     [ObservableProperty]
     private decimal _targetX = 0.0000m;
@@ -91,5 +94,11 @@ public partial class MainViewModel(IAerospaceMathService mathService) : Observab
         decimal devY = mathService.CalculateDeviation(TargetY, ActualY);
 
         TruePositionResult = mathService.CalculateTruePosition(devX, devY);
+    }
+
+    [RelayCommand]
+    private void NavigateToTab(int tabIndex)
+    {
+        SelectedTabIndex = tabIndex;
     }
 }
