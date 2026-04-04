@@ -1,0 +1,88 @@
+# Default: normalize line endings; let Git decide text vs binary
+* text=auto eol=lf
+
+# --- Source / docs ---
+*.cs     text diff=csharp
+*.shader text diff=csharp
+*.cginc  text diff=csharp
+*.hlsl   text diff=csharp
+*.compute text diff=csharp
+*.json   text
+*.xml    text
+*.xaml   text
+*.md     text
+*.txt    text
+*.yml    text
+*.yaml   text
+
+# --- Unity text assets (merge carefully; configure unityyamlmerge if your team uses it) ---
+*.meta   text
+*.asmdef text
+*.unity  text merge=union
+*.prefab text merge=union
+*.asset  text merge=union
+*.mat    text merge=union
+*.anim   text merge=union
+*.controller text merge=union
+*.overrideController text merge=union
+*.physicMaterial2D text merge=union
+*.physicsMaterial2D text merge=union
+*.physicsMaterial text merge=union
+*.mask   text merge=union
+*.spriteatlas text merge=union
+*.terrainlayer text merge=union
+*.inputactions text merge=union
+*.shadersubgraph text merge=union
+*.vfx    text merge=union
+*.uxml   text merge=union
+*.uss    text merge=union
+
+# --- Git LFS: large binaries (game art, audio, video, meshes) ---
+# Install: https://git-lfs.com — then `git lfs install` and commit.
+*.psd    filter=lfs diff=lfs merge=lfs -text
+*.tif    filter=lfs diff=lfs merge=lfs -text
+*.tiff   filter=lfs diff=lfs merge=lfs -text
+*.tga    filter=lfs diff=lfs merge=lfs -text
+*.exr    filter=lfs diff=lfs merge=lfs -text
+*.hdr    filter=lfs diff=lfs merge=lfs -text
+*.bmp    filter=lfs diff=lfs merge=lfs -text
+
+*.fbx    filter=lfs diff=lfs merge=lfs -text
+*.obj    filter=lfs diff=lfs merge=lfs -text
+*.blend  filter=lfs diff=lfs merge=lfs -text
+*.dae    filter=lfs diff=lfs merge=lfs -text
+*.3ds    filter=lfs diff=lfs merge=lfs -text
+*.glb    filter=lfs diff=lfs merge=lfs -text
+*.gltf   filter=lfs diff=lfs merge=lfs -text
+
+*.wav    filter=lfs diff=lfs merge=lfs -text
+*.aif    filter=lfs diff=lfs merge=lfs -text
+*.aiff   filter=lfs diff=lfs merge=lfs -text
+*.mp3    filter=lfs diff=lfs merge=lfs -text
+*.ogg    filter=lfs diff=lfs merge=lfs -text
+*.flac   filter=lfs diff=lfs merge=lfs -text
+
+*.mp4    filter=lfs diff=lfs merge=lfs -text
+*.mov    filter=lfs diff=lfs merge=lfs -text
+*.webm   filter=lfs diff=lfs merge=lfs -text
+*.avi    filter=lfs diff=lfs merge=lfs -text
+
+# Fonts (large / licensed)
+*.otf    filter=lfs diff=lfs merge=lfs -text
+*.ttf    filter=lfs diff=lfs merge=lfs -text
+
+# Packed / archives
+*.zip    filter=lfs diff=lfs merge=lfs -text
+*.7z     filter=lfs diff=lfs merge=lfs -text
+*.rar    filter=lfs diff=lfs merge=lfs -text
+
+# Native plugins (often binary; adjust if you commit small managed-only DLLs on purpose)
+*.dll    filter=lfs diff=lfs merge=lfs -text
+*.so     filter=lfs diff=lfs merge=lfs -text
+*.dylib  filter=lfs diff=lfs merge=lfs -text
+*.a      filter=lfs diff=lfs merge=lfs -text
+
+# Optional: PNG/JPEG — enable if textures balloon repo size (many teams LFS all PNG in Assets/)
+# *.png  filter=lfs diff=lfs merge=lfs -text
+# *.jpg  filter=lfs diff=lfs merge=lfs -text
+# *.jpeg filter=lfs diff=lfs merge=lfs -text
